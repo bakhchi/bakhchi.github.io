@@ -158,3 +158,22 @@ img {
     animation-iteration-count: 1;
 }
 
+#ana {
+    width: 30%;
+    float: right;
+    width: 30%;
+    display: block;
+    margin: auto;
+}
+
+#ana img {
+    width: 80%; 
+    border-radius: 2px;
+    box-shadow: none; 
+    transition: transform 0.3s;
+
+}
+
+#ana :hover {
+    transform: scale(1.1);
+}
