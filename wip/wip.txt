@@ -1,0 +1,8 @@
+Homemade Linux Shell | C, Linux (October 2025)
+Client Intrusion Detection Service | Python, Computer Networks, Linux (May 2025 - Present)
+MOSFET Differential Amplifier | Electrical Engineering (May 2025)
+
+
+<li><strong>Homemade Linux Shell</strong> | C, Linux (October 2025)</li>
+<li><strong>Client Intrusion Detection Service</strong> | Python, Computer Networks, Linux (May 2025 - Present)</li>
+<li><strong>MOSFET Differential Amplifier</strong> | Electrical Engineering (May 2025) </li>
