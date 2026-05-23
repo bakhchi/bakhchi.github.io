@@ -9,6 +9,21 @@
     --text-main: #f1f5f9;
     --text-muted: #94a3b8;
     --nav-bg: rgba(15, 23, 42, 0.8);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.light-mode {
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --primary: #0284c7;
+    --secondary: #4f46e5;
+    --accent: #0891b2;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --nav-bg: rgba(241, 245, 249, 0.8);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -23,6 +38,7 @@ body {
     background-attachment: fixed;
     color: var(--text-main);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -45,42 +61,38 @@ header h1 {
 nav {
     display: flex;
     justify-content: center;
-    padding: 15px 0;
+    align-items: center;
+    padding: 15px 20px;
     background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav a {
     color: var(--text-muted);
     text-decoration: none;
-    margin: 0 25px;
+    margin: 0 15px;
     font-weight: 500;
     font-size: 1rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
 
-nav a:hover {
+nav a.nav-active {
     color: var(--primary);
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--primary);
-    transition: width 0.3s ease;
-}
-
-nav a:hover::after {
+nav a.nav-active::after {
     width: 100%;
 }
 
@@ -92,8 +104,71 @@ nav a:hover::after {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+/* UI Elements */
+#theme-toggle, .menu-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+#theme-toggle:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: rotate(15deg);
+}
+
+.menu-toggle {
+    display: none;
+}
+
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    background: var(--secondary);
+}
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 section {
@@ -263,13 +338,48 @@ img {
     }
 
     nav {
-        flex-wrap: wrap;
-        padding: 10px;
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
     }
 
     nav a {
-        margin: 5px 12px;
-        font-size: 0.9rem;
+        margin: 12px 0;
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a::after {
+        display: none; /* Hide hover underline on mobile to simplify */
+    }
+
+    .menu-toggle {
+        display: flex;
+        order: 1;
+    }
+
+    #theme-toggle {
+        order: 2;
+        margin-left: 0;
     }
 
     .container {

@@ -6,19 +6,24 @@
     <title>Projects - Zachary Bakhchi</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<script src="index.js"></script>
 <body>
     <header>
         <h1>Zachary Bakhchi</h1>
         <nav>
-            <a href="index.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="experiences.html">Experience</a>
-            <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
-            <a href="mailto:zacharybakhchi@gmail.com">Email</a>
-            <a href="assets/Resume.pdf">Resume</a>
+            <button class="menu-toggle">☰</button>
+            <div class="nav-links">
+                <a href="index.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="experiences.html">Experience</a>
+                <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
+                <a href="mailto:zacharybakhchi@gmail.com">Email</a>
+                <a href="assets/Resume.pdf">Resume</a>
+            </div>
+            <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
         </nav>
     </header>
-    <div class="container">
+    <div class="container reveal">
         <h2>Projects</h2>
         <ul>
             <li><strong>CooperLink</strong> | Java, React, Azure (May 2026): Fullstack web app connecting Cooper Union students with alumni mentors and career opportunities. Built Spring Boot backend with PostgreSQL and React frontend with Firebase authentication. Containerized with Docker Compose and deployed on Azure. Collaborated with the Cooper Union Alumni Association to refine platform requirements and deployment goals.</li>
@@ -71,5 +76,6 @@
 
         </ul>
     </div>
+    <button id="backToTop">↑</button>
 </body>
 </html>

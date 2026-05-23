@@ -11,15 +11,19 @@
     <header>
         <h1>Zachary Bakhchi</h1>
         <nav>
-            <a href="index.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="experiences.html">Experience</a>
-            <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
-            <a href="mailto:zacharybakhchi@gmail.com">Email</a>
-            <a href="assets/Resume.pdf">Resume</a>
+            <button class="menu-toggle">☰</button>
+            <div class="nav-links">
+                <a href="index.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="experiences.html">Experience</a>
+                <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
+                <a href="mailto:zacharybakhchi@gmail.com">Email</a>
+                <a href="assets/Resume.pdf">Resume</a>
+            </div>
+            <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
         </nav>
     </header>
-    <div class="container" >
+    <div class="container reveal">
         <section id="about">
             <h2>Welcome</h2>
             <p> Hi, I'm Zach, an Electrical Engineering student at The Cooper Union. I’m passionate about the intersection of software and hardware, with a focus on Full-Stack development, AI/LLMs, Computer Networks, and Signal & Image Processing. Building and collaborating in technology drives my passion for continuous innovation and impactful solutions to real-world problems.</p>
@@ -27,5 +31,6 @@
             <img src="assets/Zach.JPG" alt="Photo of Zachary Bakhchi" onclick="shakeScreen()">            
         </section>
     </div>
+    <button id="backToTop">↑</button>
 </body>
 </html>

@@ -6,20 +6,25 @@
     <title>Experience - Zachary Bakhchi</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<script src="index.js"></script>
 <body>
     <header>
         <h1>Zachary Bakhchi</h1>
         <nav>
-            <a href="index.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="experiences.html">Experience</a>
-            <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
-            <a href="mailto:zacharybakhchi@gmail.com">Email</a>
-            <a href="assets/Resume.pdf">Resume</a>
+            <button class="menu-toggle">☰</button>
+            <div class="nav-links">
+                <a href="index.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="experiences.html">Experience</a>
+                <a href="https://linkedin.com/in/zachary-bakhchi" target="_blank">LinkedIn</a>
+                <a href="mailto:zacharybakhchi@gmail.com">Email</a>
+                <a href="assets/Resume.pdf">Resume</a>
+            </div>
+            <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
         </nav>
     </header>
     <div class="container">
-        <section id="education">
+        <section id="education" class="reveal">
             <h2>Education</h2>
             <h3>The Cooper Union for The Advancement of Science and Art</h3>
             <p>August 2023 – May 2027</p>
@@ -29,7 +34,7 @@
                 <li>Honors: Dean's List</li>
             </ul>
         </section>
-        <section id="experience">
+        <section id="experience" class="reveal">
             <h2>Work Experience</h2>
             
             <h3>Software and Systems Engineer - Ana's Cloud LLC</h3>
@@ -51,7 +56,7 @@
                 <li>Executed data migration projects, transitioning legacy hard drives to Microsoft SharePoint and OneDrive.</li>
             </ul>
         </section>
-        <section id="skills">
+        <section id="skills" class="reveal">
             <h2>Skills</h2>
             <ul>
                 <li><strong>Technical Areas:</strong> Full-Stack, AI/LLMs, Computer Networks, Signal & Image Processing</li>
@@ -60,7 +65,7 @@
                 <li><strong>Platforms:</strong> Linux, Windows</li>
             </ul>
         </section>
-        <section id="leadership">
+        <section id="leadership" class="reveal">
             <h2>Leadership & Activities</h2>
             <ul>
                 <li><strong>Leadership:</strong> President of Hillel</li>
@@ -68,5 +73,6 @@
             </ul>
         </section>
     </div>
+    <button id="backToTop">↑</button>
 </body>
 </html>
