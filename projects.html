@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Zachary Bakhchi</title>
+    <meta name="description" content="Engineering, software, and research projects by Zachary Bakhchi — Cooper Union EE student.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="index.js" defer></script>
 </head>
-<script src="index.js"></script>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <header>
         <h1>Zachary Bakhchi</h1>
         <nav>
@@ -23,59 +26,263 @@
             <button id="theme-toggle" onclick="toggleTheme()">☀️</button>
         </nav>
     </header>
+
     <div class="container reveal">
-        <h2>Projects</h2>
-        <ul>
-            <li><strong>CooperLink</strong> | Java, React, Azure (May 2026): Fullstack web app connecting Cooper Union students with alumni mentors and career opportunities. Built Spring Boot backend with PostgreSQL and React frontend with Firebase authentication. Containerized with Docker Compose and deployed on Azure. Collaborated with the Cooper Union Alumni Association to refine platform requirements and deployment goals.</li>
+        <h2 style="text-align: center; margin-bottom: 10px;">Projects</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">A collection of academic coursework, professional installations, and engineering projects. Click any project card to view details.</p>
+        <div class="projects-list">
 
-            <li><strong>MRI Compressed Sensing Reconstruction</strong> | MATLAB, Image Processing (May 2026): Developed an MRI reconstruction pipeline using compressed sensing and wavelet-domain sparsity techniques. Implemented Fourier analysis, multilevel wavelet decompositions across different wavelet bases. Built an iterative gradient descent reconstruction algorithm with random undersampling to simulate MRI scans and evaluate reconstruction error.</li>
-
-            <li><strong>Real-Time ASCII Video Renderer (Video2ASCII)</strong> | Python, OpenCV (December 2025): Built a configurable ASCII rendering engine that converts images, videos, and live webcam input into grayscale or true-color ASCII output in real time. Implemented configurable rendering options for color modes, resolution scaling, and multiple input sources.</li>
-            <div id="links">
-                <br><strong>You can find this project on my <a href="https://github.com/bakhchi/Video2ASCII">GitHub!</a></strong>
-            </div>
-
-            <li><strong>FIFO Library</strong> | C, Linux (November 2025): A simple FIFO library implemented in C. Built off of semaphore structures that are built off of primitive spin locks. The program is meant to solve the problem of concurrent access to shared data structures in a multi-threaded environment, dealing with multiple readers and writers.</li>
-            <div id="links">
-                <br><strong>You can find this project on my <a href="https://github.com/bakhchi/FIFO-Library">GitHub!</a></strong>
-            </div>
-
-            <li><strong>Homemade Linux Shell</strong> | C, Linux (October 2025): Minimal Unix-like shell supporting command parsing, pipelines, I/O redirection, background jobs, and basic scripting. Makes use of the basic system calls. Made for my operating systems class at Cooper Union.</li>
-            <div id="links">
-                <br><strong>You can find this project on my <a href="https://github.com/bakhchi/MyShell">GitHub!</a></strong>
-            </div>
-            
-            <li><strong>MOSFET Amplifier</strong> | Electrical Engineering (May 2025): Designed and built a MOSFET amplifier in industry-grade software. Simulated performance, and met all specs. </li>
-
-            <li><strong>AI-Chatbot for The Conference Board (AskTCB)</strong> | Python, NodeJS, Azure (June 2024 – April 2025): Developed an AI-powered enterprise chatbot for The Conference Board using Azure OpenAI and retrieval-augmented generation (RAG) pipeline. Integrated Azure AI Search, Bing Search APIs, and automated email support workflows into the chatbot platform. Regularly discussed and presented proof of concept to CTO and other relevant stakeholders.</li>
-            <div id="links">
-                <br><strong>Check out AskTCB <a href="https://www.conference-board.org/us">here!</a></strong>
+            <!-- Project 1: CooperLink -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('cooperlink')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-users"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>CooperLink</h3>
+                        <span class="project-date">May 2026</span>
+                    </div>
+                    <p class="project-description">Fullstack mentoring platform connecting Cooper Union students with alumni mentors, career advice, and professional networks.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <li><strong>Multi-Threaded Port Scanner</strong> | Python (February 2025): A project made for Communication Networks, a class at Cooper Union. Project requirements included scans based on an input file, outputting results to a file, and having the options to specify hosts and ports to scan. Threading was implemented to make the program run scans in parallel and was able to increase overall speed of the program. The program utilizes socket, threading, and argeparse libraries from Python.</li>
-            <div id="links">
-                <br><strong>You can find this project on my <a href="https://github.com/bakhchi/SimplePortScanner">GitHub!</a></strong>
-            </div>
-            
-            <li><strong>Physics with Python</strong> | Python (December 2024): This experiment, part of Intro to Physics Lab at Cooper Union, used Python to create basic plots demonstrating wave interference and diffraction, phenomena first explored by Thomas Young. Simulations, created with Python's matplotlib and numpy libraries, provided a clearer visualization of his findings. </li>
-            <div id="lab">
-                <a href="https://colab.research.google.com/drive/14mXbHAESHEIYYbYnd5RwzLsJKyd0RtdK?usp=sharing"><img src="assets/Young Simulation.png" alt="Diffraction Simulaton"><img src="assets/Young Simulation2.png" alt="Intensity Simulaton"></a>
-            </div>
-            
-            <li><strong>Theremin</strong> | Electrical Engineering (December 2024): Sophomore Electrical Engineering Projects included reverse engineering and building a Theremin, a musical instrument that produces notes based on proximity to an antenna. Over the semester, components were assembled on breadboards, culminating in a functional Theremin for hands-on demonstration. </li>
-            <div id="theremin">
-                <img src="assets/theremin.jpg" alt="Image of Theremin Project">
-            </div>
-            
-            <li><strong>Game Portfolio</strong> | C, Python, Git (Jan. 2024 – May 2024): Made games in Programming for Electrical Engineers, a basic computer science class at Cooper Union. Developed SOS, a game like Tic Tac Toe but with a greater degree of difficulty, programmed in C. Created Uno, the popular card game where friendships are destroyed, programmed in Python. Designed Wheel of Fortune, the well-known TV game show, programmed in Python.</li>
-            
-            <li><strong>Network Diagram</strong> | Microsoft Visio (July 2023): Compiled documentation of network infrastructure at one of Ana’s mid-sized clients. Learned how each part of the client's environment interacted with the others. Utilized the diagram as a map whenever there is any potential internet outage.</li>
-            <div id="network">
-                <img src="assets/networkdiagram.png" alt="Image of Network Diagram Projet">
+            <!-- Project 2: MRI Reconstruction -->
+            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('mri')">
+                <div class="project-visual">
+                    <img src="assets/mri.png" alt="MRI Reconstruction">
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>MRI Compressed Sensing Reconstruction</h3>
+                        <span class="project-date">May 2026</span>
+                    </div>
+                    <p class="project-description">Advanced MRI reconstruction modeling in MATLAB leveraging compressed sensing algorithms and multilevel wavelets.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">MATLAB</span>
+                            <span class="project-tag">Image Processing</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </ul>
+            <!-- Project 3: Video2ASCII -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('video2ascii')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-terminal"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Real-Time ASCII Video Renderer (Video2ASCII)</h3>
+                        <span class="project-date">December 2025</span>
+                    </div>
+                    <p class="project-description">Real-time rendering engine that translates webcam streams and local video files into colorized or grayscale ASCII output.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">OpenCV</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: FIFO Library -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('fifo')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-microchip"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>FIFO Library</h3>
+                        <span class="project-date">November 2025</span>
+                    </div>
+                    <p class="project-description">A thread-safe concurrent queue library in C implementing custom spin lock-based semaphores for synchronization.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5: Linux Shell -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('shell')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-terminal"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Homemade Linux Shell</h3>
+                        <span class="project-date">October 2025</span>
+                    </div>
+                    <p class="project-description">A custom Unix-like command parser supporting shell scripting, pipeline filtering, and job execution control.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6: MOSFET Amplifier -->
+            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('mosfet')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-wave-square"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>MOSFET Amplifier</h3>
+                        <span class="project-date">May 2025</span>
+                    </div>
+                    <p class="project-description">Simulated and physical prototyping of an electrical MOSFET transistor amplifier conforming to lab guidelines.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Electrical Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7: AskTCB Chatbot -->
+            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('asktcb')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-robot"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>AI-Chatbot for The Conference Board (AskTCB)</h3>
+                        <span class="project-date">April 2025</span>
+                    </div>
+                    <p class="project-description">An AI enterprise chatbot utilizing RAG pipelines, Bing Search APIs, and Azure OpenAI model endpoints.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">NodeJS</span>
+                            <span class="project-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8: Port Scanner -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('portscanner')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-shield-alt"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Multi-Threaded Port Scanner</h3>
+                        <span class="project-date">February 2025</span>
+                    </div>
+                    <p class="project-description">High-speed network security port scanner executing concurrent parallel checks via Python multithreading queues.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 9: Physics Simulations -->
+            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('physics')">
+                <div class="project-visual">
+                    <img src="assets/Young Simulation.png" alt="Diffraction Simulation">
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Physics with Python</h3>
+                        <span class="project-date">December 2024</span>
+                    </div>
+                    <p class="project-description">Physics simulations plotting Thomas Young's light interference and wave diffraction experiments.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 10: Theremin -->
+            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('theremin')">
+                <div class="project-visual">
+                    <img src="assets/theremin.jpg" alt="Theremin Project Image">
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Theremin</h3>
+                        <span class="project-date">December 2024</span>
+                    </div>
+                    <p class="project-description">Designed and calibrated circuit oscillators on breadboards to fabricate a pitch and volume-controlled Theremin.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Electrical Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 11: Game Portfolio -->
+            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('games')">
+                <div class="project-visual">
+                    <i class="project-icon fas fa-gamepad"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Game Portfolio</h3>
+                        <span class="project-date">May 2024</span>
+                    </div>
+                    <p class="project-description">A suite of course projects including SOS (C terminal engine), Uno (Python logic), and Wheel of Fortune (Python solver).</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 12: Client Network Diagram -->
+            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('network')">
+                <div class="project-visual">
+                    <img src="assets/networkdiagram.png" alt="Network Diagram Project Image">
+                </div>
+                <div class="project-content">
+                    <div class="project-row-header">
+                        <h3>Network Diagram</h3>
+                        <span class="project-date">July 2023</span>
+                    </div>
+                    <p class="project-description">Enterprise network visual topology modeling documenting client network nodes, routers, and configurations.</p>
+                    <div class="project-row-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">Microsoft Visio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <!-- Project Detail Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+            <div id="modal-content-area">
+                <!-- Content injected dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
     <button id="backToTop">↑</button>
 </body>
 </html>

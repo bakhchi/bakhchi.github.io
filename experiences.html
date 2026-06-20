@@ -8,6 +8,7 @@
 </head>
 <script src="index.js"></script>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <header>
         <h1>Zachary Bakhchi</h1>
         <nav>
@@ -26,51 +27,154 @@
     <div class="container">
         <section id="education" class="reveal">
             <h2>Education</h2>
-            <h3>The Cooper Union for The Advancement of Science and Art</h3>
-            <p>August 2023 – May 2027</p>
-            <ul>
-                <li><strong>Bachelor of Engineering, Electrical Engineering | Half-Tuition Scholarship</strong></li>
-                <li>Relevant Coursework: Digital Logic Design, Data Structures & Algorithms, Computer Architecture, Communication Networks, Operating Systems, Software Engineering, Signal Processing, Digital Signal Processing, Medical Imaging</li>
-                <li>Honors: Dean's List</li>
-            </ul>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <h3>The Cooper Union for The Advancement of Science and Art</h3>
+                        <span class="timeline-date">August 2023 – May 2027</span>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="degree"><strong>Bachelor of Engineering, Electrical Engineering</strong> | Half-Tuition Scholarship</p>
+                        <p class="honors"><strong>Honors:</strong> Dean's List</p>
+                        <div class="coursework">
+                            <strong>Relevant Coursework:</strong>
+                            <div class="course-tags">
+                                <span class="course-tag">Digital Logic Design</span>
+                                <span class="course-tag">Data Structures & Algorithms</span>
+                                <span class="course-tag">Computer Architecture</span>
+                                <span class="course-tag">Communication Networks</span>
+                                <span class="course-tag">Operating Systems</span>
+                                <span class="course-tag">Software Engineering</span>
+                                <span class="course-tag">Signal Processing</span>
+                                <span class="course-tag">Digital Signal Processing</span>
+                                <span class="course-tag">Medical Imaging</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
+        
         <section id="experience" class="reveal">
             <h2>Work Experience</h2>
-            
-            <h3>Software and Systems Engineer - Ana's Cloud LLC</h3>
-            <div id="ana">
-                <a href="https://ana.com"><img src="assets/ana.jpg"></a>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <div class="job-title-container">
+                            <h3>Software and Systems Engineer</h3>
+                            <span class="company"><a href="https://ana.com" target="_blank">Ana's Cloud LLC</a></span>
+                        </div>
+                        <span class="timeline-date">September 2023 – May 2026</span>
+                    </div>
+                    <div class="timeline-body">
+                        <div id="ana">
+                            <a href="https://ana.com" target="_blank"><img src="assets/ana.jpg" alt="Ana's Cloud LLC Logo"></a>
+                        </div>
+                        <ul>
+                            <li>Leading development of a managed intrusion detection platform for real-time client network monitoring.</li>
+                            <li>Led the successful implementation of an AI chatbot, enhancing customer engagement for a major client.</li>
+                            <li>Resolved and escalated hundreds of client software and system support incidents across diverse environments.</li>
+                            <li>Participated in disaster recovery for a client following data breach.</li>
+                        </ul>
+                    </div>
                 </div>
-            <p>September 2023 – May 2026</p>
-            <ul>
-                <li>Leading development of a managed intrusion detection platform for real-time client network monitoring.</li>
-                <li>Led the successful implementation of an AI chatbot, enhancing customer engagement for a major client.</li>
-                <li>Resolved and escalated hundreds of client software and system support incidents across diverse environments.</li>
-                <li>Participated in disaster recovery for a client following data breach.</li>
-            </ul>
-            <h3>Intern - Ana's Cloud LLC</h3>
-            <p>December 2022 – August 2023</p>
-            <ul>
-                <li>Explored the potential of Microsoft Copilot and other large language models, proposing innovative client solutions.</li>
-                <li>Maintained environments and created detailed network diagrams for a diverse client base.</li>
-                <li>Executed data migration projects, transitioning legacy hard drives to Microsoft SharePoint and OneDrive.</li>
-            </ul>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <div class="job-title-container">
+                            <h3>Intern</h3>
+                            <span class="company"><a href="https://ana.com" target="_blank">Ana's Cloud LLC</a></span>
+                        </div>
+                        <span class="timeline-date">December 2022 – August 2023</span>
+                    </div>
+                    <div class="timeline-body">
+                        <ul>
+                            <li>Explored the potential of Microsoft Copilot and other large language models, proposing innovative client solutions.</li>
+                            <li>Maintained environments and created detailed network diagrams for a diverse client base.</li>
+                            <li>Executed data migration projects, transitioning legacy hard drives to Microsoft SharePoint and OneDrive.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
+        
         <section id="skills" class="reveal">
             <h2>Skills</h2>
-            <ul>
-                <li><strong>Technical Areas:</strong> Full-Stack, AI/LLMs, Computer Networks, Signal & Image Processing</li>
-                <li><strong>Languages:</strong> Python, Java, JavaScript/TypeScript, SQL, C/C++, MATLAB</li>
-                <li><strong>Frameworks & DevOps:</strong> React, Node.js, Spring Boot, OpenCV, Docker, Git/GitHub, Azure, Firebase, PostgreSQL</li>
-                <li><strong>Platforms:</strong> Linux, Windows</li>
-            </ul>
+            <div class="skills-list">
+                <div class="skills-row">
+                    <h3 class="skills-label">Technical Areas</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Full-Stack</span>
+                        <span class="skill-badge">AI/LLMs</span>
+                        <span class="skill-badge">Computer Networks</span>
+                        <span class="skill-badge">Signal & Image Processing</span>
+                    </div>
+                </div>
+                
+                <div class="skills-row">
+                    <h3 class="skills-label">Languages</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">Java</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">TypeScript</span>
+                        <span class="skill-badge">SQL</span>
+                        <span class="skill-badge">C/C++</span>
+                        <span class="skill-badge">MATLAB</span>
+                    </div>
+                </div>
+                
+                <div class="skills-row">
+                    <h3 class="skills-label">Frameworks & DevOps</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">Spring Boot</span>
+                        <span class="skill-badge">OpenCV</span>
+                        <span class="skill-badge">Docker</span>
+                        <span class="skill-badge">Git/GitHub</span>
+                        <span class="skill-badge">Azure</span>
+                        <span class="skill-badge">Firebase</span>
+                        <span class="skill-badge">PostgreSQL</span>
+                    </div>
+                </div>
+                
+                <div class="skills-row">
+                    <h3 class="skills-label">Platforms</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Linux</span>
+                        <span class="skill-badge">Windows</span>
+                    </div>
+                </div>
+            </div>
         </section>
+        
         <section id="leadership" class="reveal">
             <h2>Leadership & Activities</h2>
-            <ul>
-                <li><strong>Leadership:</strong> President of Hillel</li>
-                <li><strong>Organizations:</strong> IEEE</li>
-            </ul>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <h3>President of Hillel</h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>Providing guidance and organizational leadership to foster community and engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-header">
+                        <h3>IEEE Member</h3>
+                    </div>
+                    <div class="timeline-body">
+                        <p>Active participation in professional development, technical workshops, and community events.</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     <button id="backToTop">↑</button>
