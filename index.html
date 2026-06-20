@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Zachary Bakhchi</title>
+    <meta name="description" content="Zachary Bakhchi — Electrical Engineering student at The Cooper Union. Full-Stack, AI/LLMs, Signal Processing.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <script src="index.js"></script>
 <body>
@@ -27,10 +29,33 @@
     <div class="container reveal">
         <section id="about">
             <h2>⚙️</h2>
-            <p> Hi, I'm Zach, an Electrical Engineering student at The Cooper Union. I’m passionate about the intersection of software and hardware, with a focus on Full-Stack development, AI/LLMs, Computer Networks, and Signal & Image Processing. Building and collaborating in technology drives my passion for continuous innovation and impactful solutions to real-world problems.</p>
+            <p> Hi, I'm Zach, an Electrical Engineering student at The Cooper Union. I'm passionate about the intersection of software and hardware, with a focus on Full-Stack development, AI/LLMs, Computer Networks, and Signal &amp; Image Processing. Building and collaborating in technology drives my passion for continuous innovation and impactful solutions to real-world problems.</p>
             <p>Outside of school and projects, I enjoy the gym, chess, puzzles, music, and movies like Revenge of the Sith, Interstellar, Whiplash, and Django Unchained. This space showcases my latest work, from class projects to professional engineering solutions.</p>
             <img src="assets/Zach.JPG" alt="Photo of Zachary Bakhchi" onclick="shakeScreen()">            
         </section>
+
+        <!-- Now Playing Widget -->
+        <div id="now-playing-widget">
+            <div id="now-playing-inner">
+                <div id="now-playing-art-wrap">
+                    <div class="now-playing-placeholder">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <img id="now-playing-art" src="" alt="Album Art" style="opacity: 0;">
+                    <div id="now-playing-bars" class="bars-idle">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div id="now-playing-info">
+                    <div id="now-playing-label">
+                        <i class="fab fa-spotify"></i>
+                        <span id="now-playing-status">Loading…</span>
+                    </div>
+                    <div id="now-playing-track">—</div>
+                    <div id="now-playing-artist">—</div>
+                </div>
+            </div>
+        </div>
     </div>
     <button id="backToTop">↑</button>
 </body>

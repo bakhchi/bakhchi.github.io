@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initAsciiStream();
     initBackgroundWave();
+    initNowPlaying();
 });
+
 
 
 // Ambient ASCII stream (drifting code characters)
@@ -384,3 +386,97 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeProjectModal();
 });
+
+// Spotify/Last.fm Integration
+function initNowPlaying() {
+    const art = document.getElementById('now-playing-art');
+    const status = document.getElementById('now-playing-status');
+    const trackEl = document.getElementById('now-playing-track');
+    const artistEl = document.getElementById('now-playing-artist');
+    const bars = document.getElementById('now-playing-bars');
+
+    if (!art || !status || !trackEl || !artistEl || !bars) return;
+
+    const API_KEY = 'be34b1efeedb4fec0652c42af73ab3c2';
+    const USERNAME = 'zbakhchi';
+    const URL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json&limit=1`;
+
+    async function updateWidget() {
+        try {
+            const res = await fetch(URL);
+            if (!res.ok) throw new Error('Last.fm API request failed');
+            
+            const data = await res.json();
+            const trackList = data.recenttracks?.track;
+            
+            if (!trackList || trackList.length === 0 || (Array.isArray(trackList) && trackList.length === 0)) {
+                status.textContent = 'Offline';
+                status.className = '';
+                trackEl.textContent = 'Not listening';
+                artistEl.textContent = 'Spotify';
+                art.style.opacity = '0';
+                bars.className = 'bars-idle';
+                return;
+            }
+
+            // In some cases, Last.fm returns a single object instead of an array if there is only 1 scrobble,
+            // but standard response structure for recenttracks is an array. Let's handle both.
+            const track = Array.isArray(trackList) ? trackList[0] : trackList;
+            if (!track) {
+                status.textContent = 'Offline';
+                status.className = '';
+                trackEl.textContent = 'Not listening';
+                artistEl.textContent = 'Spotify';
+                art.style.opacity = '0';
+                bars.className = 'bars-idle';
+                return;
+            }
+
+            const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+
+            // Extract album artwork URL
+            let artUrl = '';
+            if (track.image && Array.isArray(track.image)) {
+                // Last.fm yields multiple image sizes: small, medium, large, extralarge
+                const largeImg = track.image.find(img => img.size === 'large' || img.size === 'extralarge');
+                if (largeImg && largeImg['#text']) {
+                    artUrl = largeImg['#text'];
+                }
+            }
+
+            // Update UI elements
+            if (artUrl) {
+                art.src = artUrl;
+                art.style.opacity = '1';
+            } else {
+                art.style.opacity = '0';
+            }
+            
+            trackEl.textContent = track.name || 'Unknown Track';
+            artistEl.textContent = track.artist?.['#text'] || 'Unknown Artist';
+
+            if (isPlaying) {
+                status.textContent = 'Now Playing';
+                status.className = 'status-active';
+                bars.className = 'bars-active';
+            } else {
+                status.textContent = 'Recently Played';
+                status.className = '';
+                bars.className = 'bars-idle';
+            }
+        } catch (err) {
+            console.error('Error fetching Last.fm status:', err);
+            status.textContent = 'Offline';
+            status.className = '';
+            trackEl.textContent = 'Unable to load status';
+            artistEl.textContent = '';
+            art.style.opacity = '0';
+            bars.className = 'bars-idle';
+        }
+    }
+
+    // Call immediately and schedule updates every 30 seconds
+    updateWidget();
+    setInterval(updateWidget, 30000);
+}
+
