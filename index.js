@@ -19,7 +19,7 @@ function initAsciiStream() {
     const ctx = canvas.getContext('2d');
 
     const chars = '01{}[]<>/\\!@#$%^&*()_+-=;:,.~`|';
-    const streamCount = 50;
+    const streamCount = 20;
     const streams = [];
 
     function createStream() {
@@ -96,7 +96,7 @@ function initBackgroundWave() {
                 `rgba(30, 41, 59, ${0.15 - j * 0.04})` : 
                 `rgba(56, 189, 248, ${0.15 - j * 0.04})`;
 
-            for (let x = 0; x < canvas.width; x += 5) {
+            for (let x = 0; x < canvas.width; x += 20) {
                 const freq = 0.002 + (j * 0.001);
                 const amp = 80 + (j * 30);
                 const y = (canvas.height / 1.5) + Math.sin(x * freq + offset + (j * 2)) * amp;
@@ -107,11 +107,22 @@ function initBackgroundWave() {
             ctx.stroke();
         }
 
-        offset += 0.01;
-        requestAnimationFrame(draw);
+        offset += 0.02;
     }
 
-    draw();
+    let lastTime = 0;
+    const fpsInterval = 1000 / 24;
+
+    function animate(time) {
+        requestAnimationFrame(animate);
+        const elapsed = time - lastTime;
+        if (elapsed > fpsInterval) {
+            lastTime = time - (elapsed % fpsInterval);
+            draw();
+        }
+    }
+
+    requestAnimationFrame(animate);
 }
 
 // Theme Management
