@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightActiveLink();
     initScrollAnimations();
     initBackToTop();
-    initAsciiStream();
-    initBackgroundWave();
     initNowPlaying();
 });
 
