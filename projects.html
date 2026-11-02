@@ -8,6 +8,193 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="index.js" defer></script>
+    <style>
+        .projects-container {
+            max-width: 1040px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .project-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(56, 189, 248, 0.1);
+        }
+
+        .project-card-visual {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .light-mode .project-card-visual {
+            background: linear-gradient(135deg, rgba(241, 245, 249, 0.8), rgba(226, 232, 240, 0.9));
+        }
+
+        .project-card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: none;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-card-visual img {
+            transform: scale(1.04);
+        }
+
+        .project-card-icon {
+            font-size: 3.2rem;
+            color: var(--primary);
+            filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-card-icon {
+            transform: scale(1.08);
+        }
+
+        .project-card-content {
+            padding: 22px 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .project-card-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            transition: color 0.2s ease;
+        }
+
+        .project-card:hover .project-card-header h3 {
+            color: var(--primary);
+        }
+
+        .project-card-date {
+            font-family: monospace;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            margin-top: 2px;
+        }
+
+        .project-card-description {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0 0 16px;
+            flex-grow: 1;
+        }
+
+        .project-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .light-mode .project-card-footer {
+            border-top-color: rgba(15, 23, 42, 0.05);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .project-tag {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .light-mode .project-tag {
+            background: rgba(15, 23, 42, 0.04);
+            border-color: rgba(15, 23, 42, 0.08);
+        }
+
+        .card-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            margin-left: auto;
+        }
+
+        .card-action-link:hover {
+            background: var(--primary);
+            color: #020617;
+            transform: translateY(-1px);
+        }
+
+        .light-mode .card-action-link:hover {
+            color: #f1f5f9;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <canvas id="bg-canvas"></canvas>
@@ -27,27 +214,31 @@
         </nav>
     </header>
 
-    <div class="container reveal">
+    <div class="container projects-container reveal">
         <h2 style="text-align: center; margin-bottom: 10px;">Projects</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">A collection of academic coursework, professional installations, and engineering projects. Click any project card to view details.</p>
-        <div class="projects-list">
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 35px;">A collection of engineering systems, signal processing research, and software applications. Click any card to view details.</p>
 
-            <!-- Project 1: CooperLink -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('cooperlink')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-users"></i>
+        <div class="projects-grid">
+
+            <!-- 1. CooperLink — May 2026 -->
+            <div class="project-card reveal" onclick="openProjectModal('cooperlink')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-users"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>CooperLink</h3>
-                        <span class="project-date">May 2026</span>
+                        <span class="project-card-date">May 2026</span>
                     </div>
-                    <p class="project-description">Fullstack mentoring platform connecting Cooper Union students with alumni mentors, career advice, and professional networks.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">Full-stack platform connecting Cooper Union students with alumni mentors, career advice, and professional networks.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">Java</span>
                             <span class="project-tag">React</span>
                             <span class="project-tag">Azure</span>
+                            <span class="project-tag">Spring Boot</span>
+                            <span class="project-tag">Docker</span>
+                            <span class="project-tag">PostgreSQL</span>
                         </div>
                     </div>
                     <!-- STATIC MODAL DATA -->
@@ -57,30 +248,47 @@
                             <div class="modal-meta">May 2026</div>
                         </div>
                         <div class="modal-body">
-                            <p>Fullstack web app connecting Cooper Union students with alumni mentors and career opportunities. Built Spring Boot backend with PostgreSQL and React frontend with Firebase authentication. Containerized with Docker Compose and deployed on Azure. Collaborated with the Cooper Union Alumni Association to refine platform requirements and deployment goals.</p>
-                            
+                            <p>Full-stack web platform connecting Cooper Union students with alumni mentors and career opportunities across diverse engineering industries.</p>
+                            <ul>
+                                <li>Engineered a Spring Boot backend paired with a PostgreSQL database schema for mentor matching and profile management.</li>
+                                <li>Developed a responsive React frontend integrated with Firebase authentication.</li>
+                                <li>Containerized application tiers with Docker Compose and deployed to Azure.</li>
+                                <li>Collaborated directly with the Cooper Union Alumni Association to align features with institutional community needs.</li>
+                            </ul>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Java</span><span class="project-tag">React</span><span class="project-tag">Azure</span></div></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Java</span>
+                                <span class="project-tag">Spring Boot</span>
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Azure</span>
+                                <span class="project-tag">Docker</span>
+                                <span class="project-tag">PostgreSQL</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2: MRI Reconstruction -->
-            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('mri')">
-                <div class="project-visual">
+            <!-- 2. MRI Reconstruction — May 2026 -->
+            <div class="project-card reveal" onclick="openProjectModal('mri')">
+                <div class="project-card-visual">
                     <img src="assets/mri.png" alt="MRI Reconstruction">
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>MRI Compressed Sensing Reconstruction</h3>
-                        <span class="project-date">May 2026</span>
+                        <span class="project-card-date">May 2026</span>
                     </div>
-                    <p class="project-description">Advanced MRI reconstruction modeling in MATLAB leveraging compressed sensing algorithms and multilevel wavelets.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">MRI reconstruction pipeline in MATLAB leveraging compressed sensing and wavelet-domain sparsity with iterative soft-thresholding (ISTA).</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">MATLAB</span>
-                            <span class="project-tag">Image Processing</span>
+                            <span class="project-tag">Signal &amp; Image Processing</span>
                         </div>
+                        <a href="assets/Medical_Imaging_3.pdf" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-file-pdf"></i> Report PDF
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -89,38 +297,90 @@
                             <div class="modal-meta">May 2026</div>
                         </div>
                         <div class="modal-body">
-                            <p>Developed an MRI reconstruction pipeline using compressed sensing and wavelet-domain sparsity techniques. Implemented Fourier analysis, multilevel wavelet decompositions across different wavelet bases. Built an iterative gradient descent reconstruction algorithm with random undersampling to simulate MRI scans and evaluate reconstruction error.</p>
-                            
-                    <div class="modal-media-container">
-                        
-                            <div class="modal-media">
-                                <img src="assets/mri.png" alt="MRI Compressed Sensing Reconstruction">
+                            <p>Developed an MRI reconstruction pipeline using compressed sensing and wavelet-domain sparsity techniques to accelerate acquisition times while preserving structural fidelity.</p>
+                            <ul>
+                                <li>Implemented Fourier analysis, multilevel wavelet decompositions, and random undersampling patterns.</li>
+                                <li>Built an iterative reconstruction algorithm (ISTA) to evaluate image recovery and reconstruction error.</li>
+                            </ul>
+                            <div class="modal-media-container">
+                                <div class="modal-media">
+                                    <img src="assets/mri.png" alt="MRI Compressed Sensing Reconstruction">
+                                </div>
                             </div>
-                        
-                    </div>
-                
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">MATLAB</span><span class="project-tag">Image Processing</span></div><a href="assets/Medical_Imaging_3.pdf" target="_blank" class="modal-link"><i class="fas fa-file-pdf"></i> View Full Report (PDF)</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">MATLAB</span>
+                                <span class="project-tag">Signal &amp; Image Processing</span>
+                            </div>
+                            <a href="assets/Medical_Imaging_3.pdf" target="_blank" class="modal-link">
+                                <i class="fas fa-file-pdf"></i> View Full Report (PDF)
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3: Video2ASCII -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('video2ascii')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-terminal"></i>
+            <!-- 3. SD-OCT — April 2026 -->
+            <div class="project-card reveal" onclick="openProjectModal('sdoct')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-wave-square"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
-                        <h3>Real-Time ASCII Video Renderer (Video2ASCII)</h3>
-                        <span class="project-date">December 2025</span>
+                <div class="project-card-content">
+                    <div class="project-card-header">
+                        <h3>Spectral Domain Optical Coherence Tomography (SD-OCT)</h3>
+                        <span class="project-card-date">April 2026</span>
                     </div>
-                    <p class="project-description">Real-time rendering engine that translates webcam streams and local video files into colorized or grayscale ASCII output.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">Vectorized SD-OCT pipeline reconstructing 1D A-Scans and 2D B-Scans from raw interference data with sub-nanometer phase microscopy.</p>
+                    <div class="project-card-footer">
+                        <div class="project-tags">
+                            <span class="project-tag">MATLAB</span>
+                            <span class="project-tag">Signal &amp; Image Processing</span>
+                        </div>
+                    </div>
+                    <!-- STATIC MODAL DATA -->
+                    <div class="static-modal-data" style="display: none;">
+                        <div class="modal-header">
+                            <h2>Spectral Domain Optical Coherence Tomography (SD-OCT)</h2>
+                            <div class="modal-meta">April 2026</div>
+                        </div>
+                        <div class="modal-body">
+                            <p>Developed a high-performance, vectorized SD-OCT reconstruction pipeline to transform raw spectral interference data into axial depth profiles (A-Scans) and cross-sectional images (B-Scans).</p>
+                            <ul>
+                                <li>Developed a vectorized SD-OCT pipeline to reconstruct 1D A-Scans and 2D B-Scans from raw interference data.</li>
+                                <li>Implemented background subtraction, spectral windowing, polynomial deconvolution, and artifact suppression.</li>
+                                <li>Built a Spectral Domain Phase Microscopy (SDPM) algorithm to track sub-nanometer membrane vibrations.</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">MATLAB</span>
+                                <span class="project-tag">Signal &amp; Image Processing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Video2ASCII — December 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('video2ascii')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-terminal"></i>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-header">
+                        <h3>Real-Time ASCII Video Renderer (Video2ASCII)</h3>
+                        <span class="project-card-date">December 2025</span>
+                    </div>
+                    <p class="project-card-description">Real-time computer vision engine translating live webcam streams and local video files into colorized or grayscale ASCII output.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
                             <span class="project-tag">OpenCV</span>
                         </div>
+                        <a href="https://github.com/bakhchi/Video2ASCII" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -129,62 +389,86 @@
                             <div class="modal-meta">December 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>Built a configurable ASCII rendering engine that converts images, videos, and live webcam input into grayscale or true-color ASCII output in real time. Implemented configurable rendering options for color modes, resolution scaling, and multiple input sources.</p>
-                            
+                            <p>Built a configurable ASCII rendering engine converting static images, videos, and live webcam feeds into stylized ASCII output in real time.</p>
+                            <ul>
+                                <li>Optimized luminance mapping algorithms and pixel density calculations for low-latency terminal rendering.</li>
+                                <li>Supported color modes, grayscale gradients, resolution scaling, and multiple input sources.</li>
+                            </ul>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Python</span><span class="project-tag">OpenCV</span></div><a href="https://github.com/bakhchi/Video2ASCII" target="_blank" class="modal-link"><i class="fab fa-github"></i> View GitHub Repo</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">OpenCV</span>
+                            </div>
+                            <a href="https://github.com/bakhchi/Video2ASCII" target="_blank" class="modal-link">
+                                <i class="fab fa-github"></i> View GitHub Repo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 4: FIFO Library -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('fifo')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-microchip"></i>
+            <!-- 5. FIFO Library — November 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('fifo')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-microchip"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
-                        <h3>FIFO Library</h3>
-                        <span class="project-date">November 2025</span>
+                <div class="project-card-content">
+                    <div class="project-card-header">
+                        <h3>Concurrent FIFO Library</h3>
+                        <span class="project-card-date">November 2025</span>
                     </div>
-                    <p class="project-description">A thread-safe concurrent queue library in C implementing custom spin lock-based semaphores for synchronization.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">A thread-safe concurrent queue library in C implementing custom spin lock-based semaphores for multi-threaded synchronization.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">C</span>
                             <span class="project-tag">Linux</span>
                         </div>
+                        <a href="https://github.com/bakhchi/FIFO-Library" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
                         <div class="modal-header">
-                            <h2>FIFO Library</h2>
+                            <h2>Concurrent FIFO Library</h2>
                             <div class="modal-meta">November 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>A simple FIFO library implemented in C. Built off of semaphore structures that are built off of primitive spin locks. The program is meant to solve the problem of concurrent access to shared data structures in a multi-threaded environment, dealing with multiple readers and writers.</p>
-                            
+                            <p>A simple FIFO library implemented in C. Built off of semaphore structures that are built off of primitive spin locks to solve concurrent access to shared data structures in a multi-threaded environment.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">C</span><span class="project-tag">Linux</span></div><a href="https://github.com/bakhchi/FIFO-Library" target="_blank" class="modal-link"><i class="fab fa-github"></i> View GitHub Repo</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">C</span>
+                                <span class="project-tag">Linux</span>
+                            </div>
+                            <a href="https://github.com/bakhchi/FIFO-Library" target="_blank" class="modal-link">
+                                <i class="fab fa-github"></i> View GitHub Repo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 5: Linux Shell -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('shell')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-terminal"></i>
+            <!-- 6. Homemade Linux Shell — October 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('shell')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-terminal"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Homemade Linux Shell</h3>
-                        <span class="project-date">October 2025</span>
+                        <span class="project-card-date">October 2025</span>
                     </div>
-                    <p class="project-description">A custom Unix-like command parser supporting shell scripting, pipeline filtering, and job execution control.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">A custom Unix-like command parser supporting shell scripting, pipeline filtering, I/O redirection, and job execution control.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">C</span>
                             <span class="project-tag">Linux</span>
                         </div>
+                        <a href="https://github.com/bakhchi/MyShell" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -193,29 +477,36 @@
                             <div class="modal-meta">October 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>Minimal Unix-like shell supporting command parsing, pipelines, I/O redirection, background jobs, and basic scripting. Makes use of the basic system calls. Made for my operating systems class at Cooper Union.</p>
-                            
+                            <p>Minimal Unix-like shell supporting command parsing, pipelines, I/O redirection, background jobs, and basic scripting. Built using core POSIX system calls for Operating Systems at Cooper Union.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">C</span><span class="project-tag">Linux</span></div><a href="https://github.com/bakhchi/MyShell" target="_blank" class="modal-link"><i class="fab fa-github"></i> View GitHub Repo</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">C</span>
+                                <span class="project-tag">Linux</span>
+                            </div>
+                            <a href="https://github.com/bakhchi/MyShell" target="_blank" class="modal-link">
+                                <i class="fab fa-github"></i> View GitHub Repo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 6: MOSFET Amplifier -->
-            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('mosfet')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-wave-square"></i>
+            <!-- 7. MOSFET Amplifier — May 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('mosfet')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-bolt"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>MOSFET Amplifier</h3>
-                        <span class="project-date">May 2025</span>
+                        <span class="project-card-date">May 2025</span>
                     </div>
-                    <p class="project-description">Simulated and physical prototyping of an electrical MOSFET transistor amplifier conforming to lab guidelines.</p>
-                    <div class="project-row-footer">
-                        <div class="project-tags">
-                            <span class="project-tag">Electrical Engineering</span>
-                        </div>
+                    <p class="project-card-description">Simulated and physical prototyping of an electrical MOSFET transistor amplifier conforming to strict gain and bandwidth specs.</p>
+                    <div class="project-card-footer">
+                        <a href="assets/amplifier.pdf" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-file-pdf"></i> Report PDF
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -224,31 +515,38 @@
                             <div class="modal-meta">May 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>Designed and built a MOSFET amplifier in industry-grade software. Simulated performance, and met all specs.</p>
-                            
+                            <p>Designed and built a MOSFET amplifier using industry-grade simulation software. Simulated performance, optimized DC biasing and AC gain, and met all lab specifications.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Electrical Engineering</span></div><a href="assets/amplifier.pdf" target="_blank" class="modal-link"><i class="fas fa-file-pdf"></i> View Full Report (PDF)</a></div>
+                        <div class="modal-footer">
+                            <a href="assets/amplifier.pdf" target="_blank" class="modal-link">
+                                <i class="fas fa-file-pdf"></i> View Full Report (PDF)
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 7: AskTCB Chatbot -->
-            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('asktcb')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-robot"></i>
+            <!-- 8. AskTCB Chatbot — April 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('asktcb')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-robot"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
-                        <h3>AI-Chatbot for The Conference Board (AskTCB)</h3>
-                        <span class="project-date">April 2025</span>
+                <div class="project-card-content">
+                    <div class="project-card-header">
+                        <h3>AI Chatbot (AskTCB)</h3>
+                        <span class="project-card-date">April 2025</span>
                     </div>
-                    <p class="project-description">An AI enterprise chatbot utilizing RAG pipelines, Bing Search APIs, and Azure OpenAI model endpoints.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">An enterprise AI chatbot utilizing RAG pipelines, Bing Search APIs, and Azure OpenAI model endpoints for business intelligence.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
-                            <span class="project-tag">NodeJS</span>
                             <span class="project-tag">Azure</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">AI &amp; Machine Learning</span>
                         </div>
+                        <a href="https://www.conference-board.org/us" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-external-link-alt"></i> AskTCB
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -257,29 +555,42 @@
                             <div class="modal-meta">April 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>Developed an AI-powered enterprise chatbot for The Conference Board using Azure OpenAI and retrieval-augmented generation (RAG) pipeline. Integrated Azure AI Search, Bing Search APIs, and automated email support workflows into the chatbot platform. Regularly discussed and presented proof of concept to CTO and other relevant stakeholders.</p>
-                            
+                            <p>Developed an AI-powered enterprise chatbot for The Conference Board using Azure OpenAI and retrieval-augmented generation (RAG) pipelines. Integrated Azure AI Search, Bing Search APIs, and automated email support workflows.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Python</span><span class="project-tag">NodeJS</span><span class="project-tag">Azure</span></div><a href="https://www.conference-board.org/us" target="_blank" class="modal-link"><i class="fas fa-external-link-alt"></i> Visit AskTCB Site</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Azure</span>
+                                <span class="project-tag">Node.js</span>
+                                <span class="project-tag">AI &amp; Machine Learning</span>
+                            </div>
+                            <a href="https://www.conference-board.org/us" target="_blank" class="modal-link">
+                                <i class="fas fa-external-link-alt"></i> Visit AskTCB Site
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 8: Port Scanner -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('portscanner')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-shield-alt"></i>
+            <!-- 9. Port Scanner — February 2025 -->
+            <div class="project-card reveal" onclick="openProjectModal('portscanner')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-shield-alt"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Multi-Threaded Port Scanner</h3>
-                        <span class="project-date">February 2025</span>
+                        <span class="project-card-date">February 2025</span>
                     </div>
-                    <p class="project-description">High-speed network security port scanner executing concurrent parallel checks via Python multithreading queues.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">High-speed network security port scanner executing concurrent parallel checks via Python multithreading queues.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
+                            <span class="project-tag">Cybersecurity</span>
                         </div>
+                        <a href="https://github.com/bakhchi/SimplePortScanner" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -288,29 +599,39 @@
                             <div class="modal-meta">February 2025</div>
                         </div>
                         <div class="modal-body">
-                            <p>A project made for Communication Networks, a class at Cooper Union. Project requirements included scans based on an input file, outputting results to a file, and having the options to specify hosts and ports to scan. Threading was implemented to make the program run scans in parallel and was able to increase overall speed of the program. The program utilizes socket, threading, and argparse libraries from Python.</p>
-                            
+                            <p>A project made for Communication Networks at Cooper Union. Project requirements included scans based on an input file, outputting results, and specifying hosts and ports. Threading was implemented to execute scans in parallel using Python socket, threading, and argparse libraries.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Python</span></div><a href="https://github.com/bakhchi/SimplePortScanner" target="_blank" class="modal-link"><i class="fab fa-github"></i> View GitHub Repo</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Cybersecurity</span>
+                            </div>
+                            <a href="https://github.com/bakhchi/SimplePortScanner" target="_blank" class="modal-link">
+                                <i class="fab fa-github"></i> View GitHub Repo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 9: Physics Simulations -->
-            <div class="project-row-card reveal" data-category="ai-signal" onclick="openProjectModal('physics')">
-                <div class="project-visual">
+            <!-- 10. Physics Simulations — December 2024 -->
+            <div class="project-card reveal" onclick="openProjectModal('physics')">
+                <div class="project-card-visual">
                     <img src="assets/Young Simulation.png" alt="Diffraction Simulation">
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Physics with Python</h3>
-                        <span class="project-date">December 2024</span>
+                        <span class="project-card-date">December 2024</span>
                     </div>
-                    <p class="project-description">Physics simulations plotting Thomas Young's light interference and wave diffraction experiments.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">Physics simulations modeling and plotting Thomas Young's light interference and wave diffraction experiments.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
                         </div>
+                        <a href="https://colab.research.google.com/drive/14mXbHAESHEIYYbYnd5RwzLsJKyd0RtdK?usp=sharing" target="_blank" class="card-action-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-code"></i> Colab
+                        </a>
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -319,41 +640,40 @@
                             <div class="modal-meta">December 2024</div>
                         </div>
                         <div class="modal-body">
-                            <p>This experiment, part of Intro to Physics Lab at Cooper Union, used Python to create basic plots demonstrating wave interference and diffraction, phenomena first explored by Thomas Young. Simulations, created with Python's matplotlib and numpy libraries, provided a clearer visualization of his findings.</p>
-                            
-                    <div class="modal-media-container">
-                        
-                            <div class="modal-media">
-                                <img src="assets/Young Simulation.png" alt="Physics with Python">
+                            <p>Created basic plots demonstrating wave interference and diffraction first explored by Thomas Young using Python for Intro to Physics Lab at Cooper Union.</p>
+                            <div class="modal-media-container">
+                                <div class="modal-media">
+                                    <img src="assets/Young Simulation.png" alt="Physics with Python">
+                                </div>
+                                <div class="modal-media">
+                                    <img src="assets/Young Simulation2.png" alt="Physics with Python">
+                                </div>
                             </div>
-                        
-                            <div class="modal-media">
-                                <img src="assets/Young Simulation2.png" alt="Physics with Python">
-                            </div>
-                        
-                    </div>
-                
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Python</span></div><a href="https://colab.research.google.com/drive/14mXbHAESHEIYYbYnd5RwzLsJKyd0RtdK?usp=sharing" target="_blank" class="modal-link"><i class="fas fa-code"></i> Open Google Colab</a></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <a href="https://colab.research.google.com/drive/14mXbHAESHEIYYbYnd5RwzLsJKyd0RtdK?usp=sharing" target="_blank" class="modal-link">
+                                <i class="fas fa-code"></i> Open Google Colab
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 10: Theremin -->
-            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('theremin')">
-                <div class="project-visual">
+            <!-- 11. Theremin — December 2024 -->
+            <div class="project-card reveal" onclick="openProjectModal('theremin')">
+                <div class="project-card-visual">
                     <img src="assets/theremin.jpg" alt="Theremin Project Image">
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Theremin</h3>
-                        <span class="project-date">December 2024</span>
+                        <span class="project-card-date">December 2024</span>
                     </div>
-                    <p class="project-description">Designed and calibrated circuit oscillators on breadboards to fabricate a pitch and volume-controlled Theremin.</p>
-                    <div class="project-row-footer">
-                        <div class="project-tags">
-                            <span class="project-tag">Electrical Engineering</span>
-                        </div>
+                    <p class="project-card-description">Designed and calibrated circuit oscillators on breadboards to fabricate a pitch and volume-controlled Theremin.</p>
+                    <div class="project-card-footer">
                     </div>
                     <!-- STATIC MODAL DATA -->
                     <div class="static-modal-data" style="display: none;">
@@ -362,34 +682,31 @@
                             <div class="modal-meta">December 2024</div>
                         </div>
                         <div class="modal-body">
-                            <p>Sophomore Electrical Engineering Projects included reverse engineering and building a Theremin, a musical instrument that produces notes based on proximity to an antenna. Over the semester, components were assembled on breadboards, culminating in a functional Theremin for hands-on demonstration.</p>
-                            
-                    <div class="modal-media-container">
-                        
-                            <div class="modal-media">
-                                <img src="assets/theremin.jpg" alt="Theremin">
+                            <p>Sophomore Electrical Engineering Projects included reverse engineering and building a functional Theremin musical instrument that produces notes based on hand proximity to an antenna.</p>
+                            <div class="modal-media-container">
+                                <div class="modal-media">
+                                    <img src="assets/theremin.jpg" alt="Theremin">
+                                </div>
                             </div>
-                        
-                    </div>
-                
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Electrical Engineering</span></div></div>
+                        <div class="modal-footer">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 11: Game Portfolio -->
-            <div class="project-row-card reveal" data-category="software" onclick="openProjectModal('games')">
-                <div class="project-visual">
-                    <i class="project-icon fas fa-gamepad"></i>
+            <!-- 12. Game Portfolio — May 2024 -->
+            <div class="project-card reveal" onclick="openProjectModal('games')">
+                <div class="project-card-visual">
+                    <i class="project-card-icon fas fa-gamepad"></i>
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Game Portfolio</h3>
-                        <span class="project-date">May 2024</span>
+                        <span class="project-card-date">May 2024</span>
                     </div>
-                    <p class="project-description">A suite of course projects including SOS (C terminal engine), Uno (Python logic), and Wheel of Fortune (Python solver).</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">A suite of course projects including SOS (C terminal engine), Uno (Python logic), and Wheel of Fortune (Python solver).</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
                             <span class="project-tag">C</span>
                             <span class="project-tag">Python</span>
@@ -403,28 +720,33 @@
                             <div class="modal-meta">May 2024</div>
                         </div>
                         <div class="modal-body">
-                            <p>Made games in Programming for Electrical Engineers, a basic computer science class at Cooper Union. Developed SOS, a game like Tic Tac Toe but with a greater degree of difficulty, programmed in C. Created Uno, the popular card game where friendships are destroyed, programmed in Python. Designed Wheel of Fortune, the well-known TV game show, programmed in Python.</p>
-                            
+                            <p>Made games in Programming for Electrical Engineers at Cooper Union. Developed SOS in C, Uno in Python, and Wheel of Fortune in Python.</p>
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">C</span><span class="project-tag">Python</span><span class="project-tag">Git</span></div></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">C</span>
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Git</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 12: Client Network Diagram -->
-            <div class="project-row-card reveal" data-category="hardware" onclick="openProjectModal('network')">
-                <div class="project-visual">
+            <!-- 13. Network Diagram — July 2023 -->
+            <div class="project-card reveal" onclick="openProjectModal('network')">
+                <div class="project-card-visual">
                     <img src="assets/networkdiagram.png" alt="Network Diagram Project Image">
                 </div>
-                <div class="project-content">
-                    <div class="project-row-header">
+                <div class="project-card-content">
+                    <div class="project-card-header">
                         <h3>Network Diagram</h3>
-                        <span class="project-date">July 2023</span>
+                        <span class="project-card-date">July 2023</span>
                     </div>
-                    <p class="project-description">Enterprise network visual topology modeling documenting client network nodes, routers, and configurations.</p>
-                    <div class="project-row-footer">
+                    <p class="project-card-description">Enterprise network visual topology modeling documenting client network nodes, routers, firewalls, and configurations.</p>
+                    <div class="project-card-footer">
                         <div class="project-tags">
-                            <span class="project-tag">Microsoft Visio</span>
+                            <span class="project-tag">Cybersecurity</span>
                         </div>
                     </div>
                     <!-- STATIC MODAL DATA -->
@@ -434,18 +756,18 @@
                             <div class="modal-meta">July 2023</div>
                         </div>
                         <div class="modal-body">
-                            <p>Compiled documentation of network infrastructure at one of Ana's mid-sized clients. Learned how each part of the client's environment interacted with the others. Utilized the diagram as a map whenever there is any potential internet outage.</p>
-                            
-                    <div class="modal-media-container">
-                        
-                            <div class="modal-media">
-                                <img src="assets/networkdiagram.png" alt="Network Diagram">
+                            <p>Compiled documentation of network infrastructure at one of Ana's mid-sized clients to map client environments for maintenance and outage response.</p>
+                            <div class="modal-media-container">
+                                <div class="modal-media">
+                                    <img src="assets/networkdiagram.png" alt="Network Diagram">
+                                </div>
                             </div>
-                        
-                    </div>
-                
                         </div>
-                        <div class="modal-footer"><div class="modal-tags"><span class="project-tag">Microsoft Visio</span></div></div>
+                        <div class="modal-footer">
+                            <div class="modal-tags">
+                                <span class="project-tag">Cybersecurity</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -464,5 +786,26 @@
     </div>
 
     <button id="backToTop">↑</button>
+
+    <script>
+        function openProjectModal(id) {
+            const card = document.querySelector(`.project-card[onclick*="'${id}'"], .project-row-card[onclick*="'${id}'"]`);
+            if (!card) return;
+            const overlay = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content-area');
+            if (!overlay || !content) return;
+            const staticData = card.querySelector('.static-modal-data');
+            if (!staticData) return;
+            content.innerHTML = staticData.innerHTML;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            const overlay = document.getElementById('project-modal');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>

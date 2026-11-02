@@ -229,6 +229,23 @@ function shakeScreen() {
 // ==========================================================================
 const projectData = {}; // Keeping empty object in case anything else tries to access it, though it shouldn't be needed
 
+function filterProjects(category, btn) {
+    const cards = document.querySelectorAll('.project-row-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    buttons.forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
 function openProjectModal(id) {
     const projectCard = document.querySelector(`.project-row-card[onclick="openProjectModal('${id}')"]`);
     if (!projectCard) return;
